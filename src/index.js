@@ -1,10 +1,20 @@
 module.exports = function check(arr, config) {
-  let stack = [];
+let stack = [];
 	
 	for (let i = 0; i < arr.length; i++){
 		let stackLength = stack.length;
 		
 		for (let j = 0; j < config.length; j++){
+			if ( config[j][0] === config[j][1] && 
+				arr[i] === config[j][0]){
+					if(stack[stack.length - 1] === arr[i]){
+						stack.pop();
+					} else {
+						stack.push(arr[i]);
+					}
+					break;
+				}
+			
 			if (arr[i] === config[j][0]){
 				stack.push(arr[i]);
 				break;
@@ -25,6 +35,9 @@ module.exports = function check(arr, config) {
 		
 		
 	}
-	
+	if(stack.length === 0){
 	return true;
+	} else {
+		return false;
+	}
 }
